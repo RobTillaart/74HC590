@@ -21,8 +21,8 @@ public:
   //  CCLR    counter clear
   //  CCKEN   counter clock enable
   //  CCLK    counter clock
-  //  RCLK    register clock (if 255  RCLK == CCLK)
-  //  RCO     register clock OUT  (if 255 ==>  no RCO)
+  //  RCLK    register clock        if set to 255 ==> RCLK == CCLK
+  //  RCO     ripple carry out      if set to 255 ==> no RCO (input)
   DEV_74HC590(uint8_t OE, uint8_t CCLR, uint8_t CCKEN, uint8_t CCLK, uint8_t RCLK = 255, uint8_t RCO = 255)
   {
     _OE = OE;
@@ -62,10 +62,12 @@ public:
     digitalWrite(_CCLR, LOW);
     digitalWrite(_CCLR, HIGH);
   };
+
   void enableCounter()
   {
     digitalWrite(_CCKEN, LOW);
   };
+
   void disableCounter()
   {
     digitalWrite(_CCKEN, HIGH);
@@ -79,6 +81,7 @@ public:
 
   void pulseRegister()
   {
+    if (_RCLK == 255) return;
     digitalWrite(_RCLK, HIGH);
     digitalWrite(_RCLK, LOW);
   };
@@ -89,15 +92,14 @@ public:
     return digitalRead(_RCO);
   };
 
-private:
 
+protected:
   uint8_t _OE;
   uint8_t _CCLR;
   uint8_t _CCKEN;
   uint8_t _CCLK;
   uint8_t _RCLK;
   uint8_t _RCO;
-
   };
 
 

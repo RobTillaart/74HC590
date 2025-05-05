@@ -45,10 +45,21 @@ unittest(test_constants)
 }
 
 
-// unittest(test_constructor)
-// {
-  // 74HC590 obj;
-// }
+unittest(test_constructor)
+{
+  #define OE        4
+  #define CCLR      5
+  #define CCKEN     6
+  #define CCLK      7
+  #define RCLK      8
+  #define RCO       9
+
+  DEV_74HC590 count0(OE, CCLR, CCKEN, CCLK, RCLK, RCO);
+  DEV_74HC590 count1(OE, CCLR, CCKEN, CCLK, RCLK);
+  DEV_74HC590 count2(OE, CCLR, CCKEN, CCLK);
+
+  assertEqual(1, 1);
+}
 
 
 unittest_main()
