@@ -100,7 +100,18 @@ protected:
   uint8_t _CCLK;
   uint8_t _RCLK;
   uint8_t _RCO;
-  };
+};
+
+
+class DEV_54HC590 : public DEV_74HC590
+{
+public:
+  DEV_54HC590(uint8_t OE, uint8_t CCLR, uint8_t CCKEN, uint8_t CCLK, uint8_t RCLK = 255, uint8_t RCO = 255)
+    : DEV_74HC590(OE, CCLR, CCKEN, CCLK, RCLK, RCO)
+    {
+      //  empty for now
+    };
+};
 
 
 class DEV_54HC590 : public DEV_74HC590
